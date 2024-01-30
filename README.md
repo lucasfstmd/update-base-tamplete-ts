@@ -10,7 +10,7 @@ Just clone the project and start coding it :)
 See the [example](https://github.com/LIBE-NUTES/template-base-ts/tree/master/example) of a micro-service to accompany physical activity using this model and be happy. (0/
 
 #### Top Libraries Used
-- [**amqp-ts**](https://github.com/abreits/amqp-ts) - Simplifies communication with RabbitMQ. As for example: connection/reconnection, queue consumption, publication and more.
+- [**amqp-client-node**](https://github.com/nutes-uepb/amqp-client-node) - Client with high level of abstraction for manipulation of messages in the event bus RabbitMQ.
 - [**Chai.js**](https://www.chaijs.com/) - Assertion library that has several interfaces that allow the developer to choose the style that makes it more comfortable (BDD/TDD). It can be easily combined with any test framework for javascript code.
 - [**Express.js**](https://expressjs.com) - Framework for Node.js. Minimalist, flexible and contains a robust set of features to develop web applications.
 - [**Greenlock Express.js**](https://github.com/Daplie/greenlock-express) - Automates the generation of HTTPS certificates issued by Let's Encrypt v2 via ACME.
@@ -32,7 +32,7 @@ See the [example](https://github.com/LIBE-NUTES/template-base-ts/tree/master/exa
 - [**winston**](https://github.com/winstonjs/winston) - Simple and universal log library with support for various transports. A transport is essentially a storage device for your logs. Each instance of a winston logger can have multiple transports configured at different levels. For example, you might want error logs to be stored in a persistent remote location (such as a database), but all logs are sent to the console or to a local file.
 
 ## Installation and Development server
-Requires [Node.js](https://nodejs.org/) v6+ and [MongoDB](https://www.mongodb.com) to run.
+Requires [Node.js](https://nodejs.org/) v18+ and [MongoDB](https://www.mongodb.com) to run.
 Install the dependencies, start the local MongoDB, and start the server.
 ```sh
 $ npm install
