@@ -1,0 +1,12 @@
+openapi: 3.0.0
+info:
+  version: '1.0.0'
+  title: 'Data Cross - Application'
+  description: 'Basic model for implementation of microservices in TypeScript following principles of hexagonal and clean architecture proposed by Robert C. Martin.'
+servers:
+  - description: Local Host HTTPs
+    url: https://localhost:3001
+  # Added by API Auto Mocking Plugin
+  - description: SwaggerHub API Auto Mocking
+    url: https://virtserver.swaggerhub.com/seniorsaudemovel/base-tamplate-ts/1.0.0
+paths:
