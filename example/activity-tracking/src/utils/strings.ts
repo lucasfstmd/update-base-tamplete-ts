@@ -1,5 +1,4 @@
 import { MONTHS } from '../application/domain/validator/month.year'
-import { STATE_ALLOWED } from '../application/domain/validator/state'
 
 /**
  * Class that defines variables with default values.
@@ -124,18 +123,6 @@ export abstract class Strings {
             INVALID_FORMAT: {
                 MESSAGE: 'Identifier: {0}, is not in valid format.',
                 DESCRIPTION: 'The identifier must follow the format ddd, where d is a digit between [0-9].'
-            }
-        },
-        STATE: {
-            INVALID_VALUE: {
-                MESSAGE: '{0}: {1}, is not in valid value.',
-                DESCRIPTION: `The {0} must have one of the allowed values, they are: ${STATE_ALLOWED.join(', ')}`
-            }
-        },
-        CNPJ: {
-            INVALID_VALUE: {
-                MESSAGE: '{0}: {1}, is not in valid value.',
-                DESCRIPTION: `The {0} must follow the format ^\d{14}$ , where d is a digit between [0-9].`
             }
         },
         IE: {

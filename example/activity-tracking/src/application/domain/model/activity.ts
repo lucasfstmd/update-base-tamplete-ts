@@ -21,8 +21,8 @@ export class Activity extends Entity implements IJSONSerializable, IJSONDeserial
     private _steps?: number | undefined
     private _user!: User | undefined
 
-    constructor() {
-        super()
+    constructor(id?: string, created_at?: string, updated_at?: string) {
+        super(id, created_at, updated_at)
     }
 
     get name(): string | undefined {
@@ -109,6 +109,7 @@ export class Activity extends Entity implements IJSONSerializable, IJSONDeserial
             json = JSON.parse(json)
         }
 
+        if (json.id !== undefined) this.id = json.id
         if (json.name !== undefined) this.name = json.name
         if (json.start_time !== undefined) this.start_time = json.start_time
         if (json.end_time !== undefined) this.end_time = json.end_time
@@ -116,7 +117,7 @@ export class Activity extends Entity implements IJSONSerializable, IJSONDeserial
         if (json.max_intensity !== undefined) this.max_intensity = json.max_intensity
         if (json.max_intensity_duration !== undefined) this.max_intensity_duration = json.max_intensity_duration
         if (json.calories !== undefined) this.calories = json.calories
-        if (json.steps !== undefined) this.name = json.steps
+        if (json.steps !== undefined) this.steps = json.steps
         if (json.user !== undefined) this.user = json.user
 
         return this

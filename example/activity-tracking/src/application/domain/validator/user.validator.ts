@@ -6,6 +6,7 @@ export class UserValidator {
     public static validate(user: User): void | ValidationException {
         const fields: Array<string> = []
 
+
         // validate null
         if (!user.name) fields.push('Name')
         if (!user.email) fields.push('Email')
@@ -16,6 +17,6 @@ export class UserValidator {
         }
 
         // validate email
-        EmailValidator.validate(String(!user.email))
+        EmailValidator.validate(user.email)
     }
 }

@@ -3,8 +3,7 @@ import { User } from '../domain/model/user'
 import { IUserService } from '../port/user.service.interface'
 import { Identifier } from '../../di/identifiers'
 import { IUserRepository } from '../port/user.repository.interface'
-import { ConflictException } from '../domain/exception/conflict.exception'
-import { UserValidator } from '../domain/validator/user.validator'
+// import { UserValidator } from '../domain/validator/user.validator'
 import { IQuery } from '../port/query.interface'
 
 /**
@@ -26,12 +25,13 @@ export class UserService implements IUserService {
      * @throws {ConflictException | RepositoryException} If a data conflict occurs, as an existing user.
      */
     public async add(user: User): Promise<User | undefined> {
-        await UserValidator.validate(user)
-        const userExist = await this._userRepository.checkExist(user)
-        if (userExist) throw new ConflictException('User already has an account...')
-        return this._userRepository.create(user)
+        try {
+            const result: User | undefined = await this._userRepository.create(user)
+            return Promise.resolve(result)
+        } catch (err) {
+            return Promise.reject(err)
+        }
     }
-
     /**
      * Get the data of all users in the infrastructure.
      *

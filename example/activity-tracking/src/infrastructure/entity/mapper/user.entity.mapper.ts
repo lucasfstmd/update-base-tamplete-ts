@@ -24,7 +24,6 @@ export class UserEntityMapper implements IEntityMapper<User, UserEntity> {
     public modelToModelEntity(item: User): UserEntity {
         const result: UserEntity = new UserEntity()
 
-        if (item.id !== undefined) result.id = item.id
         if (item.name !== undefined) result.name = item.name
         if (item.email !== undefined) result.email = item.email
         return result
@@ -39,7 +38,7 @@ export class UserEntityMapper implements IEntityMapper<User, UserEntity> {
      */
     public modelEntityToModel(item: UserEntity): User {
         const result: User = new User()
-        result.id = item.id
+
         if (item.name) result.name = item.name
         if (item.email) result.email = item.email
         return result

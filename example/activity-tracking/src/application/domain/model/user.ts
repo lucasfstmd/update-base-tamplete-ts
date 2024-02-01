@@ -7,8 +7,8 @@ export class User extends Entity implements IJSONSerializable, IJSONDeserializab
     private _name?: string | undefined
     private _email?: string | undefined
 
-    constructor() {
-        super()
+    constructor(id?: string, created_at?: string, updated_at?: string) {
+        super(id, created_at, updated_at)
     }
 
     get name(): string | undefined {
@@ -37,6 +37,7 @@ export class User extends Entity implements IJSONSerializable, IJSONDeserializab
             }
             json = JSON.parse(json)
         }
+        if (json.id !== undefined) this.id = json.id
         if (json.name !== undefined) this.name = json.name
         if (json.email !== undefined) this.email = json.email
 

@@ -27,21 +27,6 @@ export class ActivityRepository extends BaseRepository<Activity, ActivityEntity>
     /**
      * @override
      */
-    public create(item: Activity): Promise<Activity> {
-        const activity: ActivityEntity = this.activityMapper.transform(item)
-        return new Promise<Activity>((resolve, reject) => {
-            this.Model.create(activity)
-                .then((result) => {
-                    result.populate('user').execPopulate()
-                        .then((res) => resolve(this.activityMapper.transform(res)))
-                })
-                .catch(err => reject(super.mongoDBErrorListener(err)))
-        })
-    }
-
-    /**
-     * @override
-     */
     public find(query: IQuery): Promise<Array<Activity>> {
         const q: any = query.toJSON()
         return new Promise<Array<Activity>>((resolve, reject) => {
@@ -107,7 +92,7 @@ export class ActivityRepository extends BaseRepository<Activity, ActivityEntity>
         const query: Query = new Query()
         return new Promise<boolean>((resolve, reject) => {
             if (activity.start_time && activity.user) {
-                query.filters = { start_time: activity.start_time, user: activity.user.id }
+                query.filters = { start_time: activity.start_time, user: activity.user }
             }
             super.findOne(query)
                 .then((result: Activity | undefined) => {

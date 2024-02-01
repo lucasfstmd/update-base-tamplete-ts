@@ -3,8 +3,6 @@ import { Identifier } from '../../di/identifiers'
 import { IActivityService } from '../port/activity.service.interface'
 import { IActivityRepository } from '../port/activity.repository.interface'
 import { Activity } from '../domain/model/activity'
-import { ActivityValidator } from '../domain/validator/activity.validator'
-import { ConflictException } from '../domain/exception/conflict.exception'
 import { IQuery } from '../port/query.interface'
 
 /**
@@ -27,10 +25,12 @@ export class ActivityService implements IActivityService {
      * @throws {ConflictException | RepositoryException} If a data conflict occurs, as an existing activity.
      */
     public async add(activity: Activity): Promise<Activity | undefined> {
-        ActivityValidator.validate(activity)
-        const activityExist = await this._activityRepository.checkExist(activity)
-        if (activityExist) throw new ConflictException('Activity is already registered...')
-        return this._activityRepository.create(activity)
+        try {
+            const result: Activity | undefined = await this._activityRepository.create(activity)
+            return Promise.resolve(result)
+        } catch (err) {
+            return Promise.reject(err)
+        }
     }
 
     /**

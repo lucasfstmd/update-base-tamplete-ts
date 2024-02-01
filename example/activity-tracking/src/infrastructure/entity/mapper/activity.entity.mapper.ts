@@ -26,7 +26,6 @@ export class ActivityEntityMapper implements IEntityMapper<Activity, ActivityEnt
     public modelToModelEntity(item: Activity): ActivityEntity {
         const result: ActivityEntity = new ActivityEntity()
 
-        if (item.id !== undefined) result.id = item.id
         if (item.name !== undefined) result.name = item.name
         if (item.start_time !== undefined) result.start_time = item.start_time
         if (item.end_time !== undefined) result.end_time = item.end_time
@@ -50,7 +49,6 @@ export class ActivityEntityMapper implements IEntityMapper<Activity, ActivityEnt
     public modelEntityToModel(item: ActivityEntity): Activity {
         const result: Activity = new Activity()
 
-        result.id = item.id
         result.name = item.name
         result.start_time = item.start_time
         result.end_time = item.end_time

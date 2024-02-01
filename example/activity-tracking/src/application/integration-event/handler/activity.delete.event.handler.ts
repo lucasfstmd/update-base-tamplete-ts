@@ -37,7 +37,7 @@ export class ActivityDeleteEventHandler implements IIntegrationEventHandler<Acti
             ]).then(results => {
                 for (const result of results) {
                     if (result.status === 'rejected') {
-                        this._logger.error(`Erreor removing patient resource. ${result.reason}`)
+                        this._logger.error(`Error removing activity resource. ${result.reason}`)
                     }
                 }
                 this._logger.info(`Action for event ${event.event_name} sucessfully performad!`)

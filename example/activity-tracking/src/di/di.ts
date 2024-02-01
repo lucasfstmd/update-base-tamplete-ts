@@ -24,7 +24,7 @@ import { SubscribeEventBusTask } from '../background/task/subscribe.event.bus.ta
 import { UserEntity } from '../infrastructure/entity/user.entity'
 import { ActivityEntity } from '../infrastructure/entity/activity.entity'
 import { UserRepoModel } from '../infrastructure/database/schema/user.schema'
-import { TaskRepoModel } from '../infrastructure/database/schema/activity.schema'
+import { ActivityRepoModel } from '../infrastructure/database/schema/activity.schema'
 import { ActivityEntityMapper } from '../infrastructure/entity/mapper/activity.entity.mapper'
 import { IEntityMapper } from '../infrastructure/entity/mapper/entity.mapper.interface'
 import { User } from '../application/domain/model/user'
@@ -38,6 +38,8 @@ import { ActivityService } from '../application/service/activity.service'
 import { IUserService } from '../application/port/user.service.interface'
 import { UserService } from '../application/service/user.service'
 import { IActivityService } from '../application/port/activity.service.interface'
+import { ActivityController } from '../ui/controllers/activity.controller'
+import { UserController } from '../ui/controllers/user.controller'
 
 class IoC {
     private readonly _container: Container
@@ -66,13 +68,15 @@ class IoC {
 
         // Controllers
         this._container.bind<HomeController>(Identifier.HOME_CONTROLLER).to(HomeController).inSingletonScope()
+        this.container.bind<UserController>(Identifier.USER_CONTROLLER).to(UserController).inSingletonScope()
+        this.container.bind<ActivityController>(Identifier.ACTIVITY_CONTROLLER).to(ActivityController).inSingletonScope()
 
         // Models
         this._container.bind(Identifier.INTEGRATION_EVENT_REPO_MODEL).toConstantValue(IntegrationEventRepoModel)
         this.container.bind(Identifier.USER_ENTITY).toConstantValue(UserEntity)
         this.container.bind(Identifier.ACTIVITY_ENTITY).toConstantValue(ActivityEntity)
         this.container.bind(Identifier.USER_REPO_MODEL).toConstantValue(UserRepoModel)
-        this.container.bind(Identifier.ACTIVITY_REPO_MODEL).toConstantValue(TaskRepoModel)
+        this.container.bind(Identifier.ACTIVITY_REPO_MODEL).toConstantValue(ActivityRepoModel)
 
         // Services
         this.container.bind<IUserService>(Identifier.USER_SERVICE).to(UserService).inSingletonScope()

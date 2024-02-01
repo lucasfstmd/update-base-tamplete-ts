@@ -3,48 +3,34 @@ import Mongoose from 'mongoose'
 interface IActivityModel extends Mongoose.Document {
 }
 
-const activitySchema = new Mongoose.Schema({
-        name: {
-            type: String,
-            required: 'Name of activity is required!'
-        },
-        start_time: {
-            type: Date,
-            required: 'Activity start time is required!',
-        },
-        end_time: { type: Date },
-        duration: {
-            type: Number,
-            required: 'Duration of activity is required!'
-        },
-        max_intensity: { type: String },
-        max_intensity_duration: { type: Number },
-        calories: {
-            type: Number,
-            required: 'Calories spent during activity is required!'
-        },
-        steps: {
-            type: Number,
-            required: 'Number of steps taken during the activity is required!'
-        },
-        user: {
-            type: Mongoose.Schema.Types.ObjectId, ref: 'User',
-            required: 'User required!'
-        }
-    },
-    {
-        timestamps: { createdAt: 'created_at', updatedAt: false },
-        toJSON: {
-            transform: (doc, ret) => {
-                ret.id = ret._id
-                delete ret._id
-                delete ret.__v
-                delete ret.updatedAt
-                return ret
-            }
+const schema: any = {
+    name: String,
+    start_time: Date,
+    end_time: Date,
+    duration: Number,
+    max_intensity: String,
+    max_intensity_duration: Number,
+    calories: Number,
+    steps: Number,
+    user: {
+        type: Mongoose.Schema.Types.ObjectId, ref: 'users',
+        required: 'User required!'
+    }
+}
+
+const options: any = {
+    timestamp: { createdAt: 'created_at', updatedAt: 'updated_at' },
+    toJson: {
+        transform: (doc, ret) => {
+            ret._id = ret.id
+            delete ret.id
+            return ret
         }
     }
-)
+}
 
-activitySchema.index({ user: 1, start_time: 1 }, { unique: true }) // define index at schema level
-export const TaskRepoModel = Mongoose.model<IActivityModel>('Activity', activitySchema)
+export const ActivityRepoModel = Mongoose.model<IActivityModel> (
+    'activitys',
+    new Mongoose.Schema(schema, options),
+    'activitys'
+)

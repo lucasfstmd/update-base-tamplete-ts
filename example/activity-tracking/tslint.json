@@ -49,7 +49,7 @@
       "allow-fast-null-checks"
     ],
     "no-eval": true,
-    "no-shadowed-variable": true,
+    "no-shadowed-variable": false,
     "no-string-literal": true,
     "no-string-throw": true,
     "no-switch-case-fall-through": true,
@@ -61,7 +61,7 @@
     ],
     "no-unnecessary-initializer": true,
     "no-var-keyword": true,
-    "no-console": true,
+    "no-console": false,
     "object-literal-sort-keys": false,
     "radix": true,
     "trailing-comma": false,
