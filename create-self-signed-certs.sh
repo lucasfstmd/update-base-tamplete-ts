@@ -2,7 +2,7 @@
 # Define where to store the generated certs and metadata.
 DIR="$(pwd)/.certs"
 
-SERVICES_NAMES=back
+SERVICES_NAMES=base-template-ts
 
 rm -rf $DIR
 mkdir -p $DIR
@@ -37,9 +37,9 @@ string_mask         = utf8only
 countryName                    = BR
 stateOrProvinceName            = PB
 localityName                   = Campina Grande
-organizationName               = SSM
-organizationalUnitName         = SSM
-commonName                     = SSM CA
+organizationName               = NUTES
+organizationalUnitName         = NUTES
+commonName                     = NUTES CA
 
 ####################################################################
 [ ca_extensions ]
@@ -163,18 +163,8 @@ for service in ${SERVICES[@]}; do
   echo "$COUNT - Generating certificates for the \"${service^^}\" Service..."
   generateCerts "server" "$service" "localhost" "server" "$DIR/$service"  # Server
   # generateCerts "client" "$service" "rabbitmq" "rabbitmq" "$DIR/$service" # Client RabbitMQ
+  generateCertsMongo "client" "$service" "mongo,${service}" "mongodb" "$DIR/$service" # Client MongoDB
 
-  if [ "$service" = "timeseries" ]; then
-    generateCerts "client" "$service" "influxdb" "influxdb" "$DIR/$service" # Client InfluxDB
-  else
-    generateCertsMongo "client" "$service" "mongo,${service}" "mongodb" "$DIR/$service" # Client MongoDB
-  fi
-
-  if [ "$service" = "vr-game" ]; then
-    # Create JWT certs
-    ssh-keygen -t rsa -P "" -b 2048 -m PEM -f "$DIR/$service/jwt.key"
-    ssh-keygen -e -m PEM -f "$DIR/$service/jwt.key" >"$DIR/$service/jwt.key.pub"
-  fi
   COUNT=$((COUNT + 1))
 done
 
