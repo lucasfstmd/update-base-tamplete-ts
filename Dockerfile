@@ -15,7 +15,7 @@ COPY . /usr/src/base-template-ts
 # Build app
 RUN npm run build
 
-EXPOSE 4000
-EXPOSE 4001
+EXPOSE 3000
+EXPOSE 3001
 
 CMD ["npm", "start"]
